@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public static class SplitableJointHelper
+namespace MeshSplitting.Splitables
 {
-    public delegate void JointHandler(Rigidbody bodyOrig, Rigidbody bodyUpper, Rigidbody bodyLower);
-}
+    public static class SplitableJointHelper
+    {
+        public delegate void JointHandler(Rigidbody bodyOrig, Rigidbody bodyUpper, Rigidbody bodyLower);
+    }
 
-public interface ISplitable
-{
-    void Split(Transform splitTransform);
+    public interface ISplitable
+    {
+        void Split(Transform splitTransform);
+    }
 }

@@ -1,18 +1,21 @@
 using UnityEngine;
 
-public class DestroyLimitY : MonoBehaviour
+namespace MeshSplitting.Demo
 {
-    public float YValue = -1f;
-    private Transform _transform;
-
-    private void Awake()
+    public class DestroyLimitY : MonoBehaviour
     {
-        _transform = GetComponent<Transform>();
-    }
+        public float YValue = -1f;
+        private Transform _transform;
 
-    private void Update()
-    {
-        if (_transform.position.y <= YValue)
-            Destroy(gameObject);
+        private void Awake()
+        {
+            _transform = GetComponent<Transform>();
+        }
+
+        private void Update()
+        {
+            if (_transform.position.y <= YValue)
+                Destroy(gameObject);
+        }
     }
 }

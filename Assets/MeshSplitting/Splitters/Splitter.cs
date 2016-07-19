@@ -1,33 +1,37 @@
+using MeshSplitting.Splitables;
 using UnityEngine;
 
-[AddComponentMenu("Mesh Splitting/Splitter")]
-[RequireComponent(typeof(Collider))]
-public class Splitter : MonoBehaviour
+namespace MeshSplitting.Splitters
 {
-    protected Transform _transform;
-
-    protected virtual void Awake()
+    [AddComponentMenu("Mesh Splitting/Splitter")]
+    [RequireComponent(typeof(Collider))]
+    public class Splitter : MonoBehaviour
     {
-        _transform = GetComponent<Transform>();
-        GetComponent<Collider>().isTrigger = true;
-    }
+        protected Transform _transform;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        MonoBehaviour[] components = other.GetComponents<MonoBehaviour>();
-        foreach (MonoBehaviour component in components)
+        protected virtual void Awake()
         {
-            ISplitable splitable = component as ISplitable;
-            if (splitable != null)
+            _transform = GetComponent<Transform>();
+            GetComponent<Collider>().isTrigger = true;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            MonoBehaviour[] components = other.GetComponents<MonoBehaviour>();
+            foreach (MonoBehaviour component in components)
             {
-                SplitObject(splitable, other.gameObject);
-                break;
+                ISplitable splitable = component as ISplitable;
+                if (splitable != null)
+                {
+                    SplitObject(splitable, other.gameObject);
+                    break;
+                }
             }
         }
-    }
 
-    protected virtual void SplitObject(ISplitable splitable, GameObject go)
-    {
-        splitable.Split(_transform);
+        protected virtual void SplitObject(ISplitable splitable, GameObject go)
+        {
+            splitable.Split(_transform);
+        }
     }
 }
